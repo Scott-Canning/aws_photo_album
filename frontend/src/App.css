@@ -28,6 +28,94 @@
   color: #61dafb;
 }
 
+.container {
+  display: block;
+  text-align: left;
+  font-size: 16px;
+  font-family: futura;
+  padding: 8px;
+  margin: auto;
+  height: auto;
+  width: 80%;
+}
+
+.header-container {
+  display: block;
+  width: 95%;
+  margin: auto;
+  padding-top: 35px;
+  font-size: 16px;
+  height: auto;
+}
+
+.sub-container {
+  display: block;
+  float: flex;
+  text-align: left;
+  font-size: 16px;
+  font-family: futura;
+  color: white;
+  width: 95%;
+  height: 125px;
+  padding: 15px;
+  margin: auto;
+  position: relative;
+  /* border-color: rgb(153, 153, 153); */
+  /* border-width: 1px;
+  border-radius: 25px; */
+  border-style: solid;
+  background-color: rgb(255, 255, 255);
+}
+
+
+.search {
+  float: center;
+  padding: 10px;
+  width: 95%;
+  margin: auto;
+  border-color: black;
+  font-size: 18px;
+  height: 30px;
+}
+
+.search input {
+  display: block;
+  margin: auto;
+  text-align: left;
+  font-size: 18px;
+  border-radius: 25px;
+  border-width: 1px;
+  padding-left: 14px;
+  padding-right: 14px;
+  height: 35px;
+  width: 80%;
+}
+
+.search-button {
+  display: flex;
+  margin: auto;
+  width: 150px;
+  height: 50px;
+}
+
+button {
+  margin: auto;
+  display: center;
+  height: 32px;
+  width: 150px;
+  font-size: 17px;
+  color: rgb(54, 56, 54);
+  border-color: rgb(223, 223, 223);
+  border-width: 1px;
+  border-radius: 10px;
+  border-style: solid;
+  background-color: rgb(223, 223, 223);
+}
+
+button:hover{background-color:rgba(223, 223, 223, 0.904);}
+button:active{background-color:rgb(255, 255, 255);
+              border-color: rgb(114, 219, 162)}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
