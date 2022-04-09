@@ -3450,6 +3450,11 @@
     "picocolors" "^1.0.0"
     "postcss-value-parser" "^4.2.0"
 
+"available-typed-arrays@^1.0.5":
+  "integrity" "sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw=="
+  "resolved" "https://registry.npmjs.org/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz"
+  "version" "1.0.5"
+
 "aws-api-gateway-client@^0.3.7":
   "integrity" "sha512-pagIdx+N2ZdCGC0GZB53QCz9sy37lbavfn3sn0mMZQqoMCn5gNG4iqpcVOt7Z5wtA+ZmzyZoI+oGOuYqUKLYBw=="
   "resolved" "https://registry.npmjs.org/aws-api-gateway-client/-/aws-api-gateway-client-0.3.7.tgz"
@@ -4804,7 +4809,7 @@
   dependencies:
     "stackframe" "^1.1.1"
 
-"es-abstract@^1.17.2", "es-abstract@^1.19.0", "es-abstract@^1.19.1":
+"es-abstract@^1.17.2", "es-abstract@^1.18.5", "es-abstract@^1.19.0", "es-abstract@^1.19.1":
   "integrity" "sha512-2vJ6tjA/UfqLm2MPs7jxVybLoB8i1t1Jd9R3kISld20sIxPcTbLuggQOUxeWeAvIUkduv/CfMjuh4WmiXr2v9w=="
   "resolved" "https://registry.npmjs.org/es-abstract/-/es-abstract-1.19.1.tgz"
   "version" "1.19.1"
@@ -5396,6 +5401,11 @@
   "integrity" "sha512-MQDfihBQYMcyy5dhRDJUHcw7lb2Pv/TuE6xP1vyraLukNDHKbDxDNaOE3NbCAdKQApno+GPRyo1YAp89yCjK4w=="
   "resolved" "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.14.9.tgz"
   "version" "1.14.9"
+
+"foreach@^2.0.5":
+  "integrity" "sha1-C+4AUBiusmDQo6865ljdATbsG5k="
+  "resolved" "https://registry.npmjs.org/foreach/-/foreach-2.0.5.tgz"
+  "version" "2.0.5"
 
 "fork-ts-checker-webpack-plugin@^6.5.0":
   "integrity" "sha512-cS178Y+xxtIjEUorcHddKS7yCMlrDPV31mt47blKKRfMd70Kxu5xruAFE2o9sDY6wVC5deuob/u/alD04YYHnw=="
@@ -6014,6 +6024,13 @@
   "resolved" "https://registry.npmjs.org/is-generator-fn/-/is-generator-fn-2.1.0.tgz"
   "version" "2.1.0"
 
+"is-generator-function@^1.0.7":
+  "integrity" "sha512-jsEjy9l3yiXEQ+PsXdmBwEPcOxaXWLspKdplFUVI9vq1iZgIekeC0L167qeu86czQaxed3q/Uzuw0swL0irL8A=="
+  "resolved" "https://registry.npmjs.org/is-generator-function/-/is-generator-function-1.0.10.tgz"
+  "version" "1.0.10"
+  dependencies:
+    "has-tostringtag" "^1.0.0"
+
 "is-glob@^4.0.0", "is-glob@^4.0.1", "is-glob@^4.0.3", "is-glob@~4.0.1":
   "integrity" "sha512-xelSayHH36ZgE7ZWhli7pW34hNbNl8Ojv5KVmkJD4hBdD3th8Tfk9vYasLM+mXWOZhFkgZfxhLSnrwRr4elSSg=="
   "resolved" "https://registry.npmjs.org/is-glob/-/is-glob-4.0.3.tgz"
@@ -6114,6 +6131,17 @@
   "version" "1.0.4"
   dependencies:
     "has-symbols" "^1.0.2"
+
+"is-typed-array@^1.1.3", "is-typed-array@^1.1.7":
+  "integrity" "sha512-HqH41TNZq2fgtGT8WHVFVJhBVGuY3AnP3Q36K8JKXUxSxRgk/d+7NjmwG2vo2mYmXK8UYZKu0qH8bVP5gEisjA=="
+  "resolved" "https://registry.npmjs.org/is-typed-array/-/is-typed-array-1.1.8.tgz"
+  "version" "1.1.8"
+  dependencies:
+    "available-typed-arrays" "^1.0.5"
+    "call-bind" "^1.0.2"
+    "es-abstract" "^1.18.5"
+    "foreach" "^2.0.5"
+    "has-tostringtag" "^1.0.0"
 
 "is-typedarray@^1.0.0":
   "integrity" "sha1-5HnICFjfDBsR3dppQPlgEfzaSpo="
@@ -8566,7 +8594,7 @@
   dependencies:
     "queue-microtask" "^1.2.2"
 
-"safe-buffer@^5.0.1", "safe-buffer@^5.1.0", "safe-buffer@>=5.1.0", "safe-buffer@~5.1.0", "safe-buffer@~5.1.1", "safe-buffer@5.1.2":
+"safe-buffer@^5.0.1", "safe-buffer@^5.1.0", "safe-buffer@^5.1.2", "safe-buffer@>=5.1.0", "safe-buffer@~5.1.0", "safe-buffer@~5.1.1", "safe-buffer@5.1.2":
   "integrity" "sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g=="
   "resolved" "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.1.2.tgz"
   "version" "5.1.2"
@@ -9544,6 +9572,18 @@
     "has-symbols" "^1.0.1"
     "object.getownpropertydescriptors" "^2.1.0"
 
+"util@^0.12.4":
+  "integrity" "sha512-bxZ9qtSlGUWSOy9Qa9Xgk11kSslpuZwaxCg4sNIDj6FLucDab2JxnHwyNTCpHMtK1MjoQiWQ6DiUMZYbSrO+Sw=="
+  "resolved" "https://registry.npmjs.org/util/-/util-0.12.4.tgz"
+  "version" "0.12.4"
+  dependencies:
+    "inherits" "^2.0.3"
+    "is-arguments" "^1.0.4"
+    "is-generator-function" "^1.0.7"
+    "is-typed-array" "^1.1.3"
+    "safe-buffer" "^5.1.2"
+    "which-typed-array" "^1.1.2"
+
 "utila@~0.4":
   "integrity" "sha1-ihagXURWV6Oupe7MWxKk+lN5dyw="
   "resolved" "https://registry.npmjs.org/utila/-/utila-0.4.0.tgz"
@@ -9804,6 +9844,18 @@
     "is-number-object" "^1.0.4"
     "is-string" "^1.0.5"
     "is-symbol" "^1.0.3"
+
+"which-typed-array@^1.1.2":
+  "integrity" "sha512-vjxaB4nfDqwKI0ws7wZpxIlde1XrLX5uB0ZjpfshgmapJMD7jJWhZI+yToJTqaFByF0eNBcYxbjmCzoRP7CfEw=="
+  "resolved" "https://registry.npmjs.org/which-typed-array/-/which-typed-array-1.1.7.tgz"
+  "version" "1.1.7"
+  dependencies:
+    "available-typed-arrays" "^1.0.5"
+    "call-bind" "^1.0.2"
+    "es-abstract" "^1.18.5"
+    "foreach" "^2.0.5"
+    "has-tostringtag" "^1.0.0"
+    "is-typed-array" "^1.1.7"
 
 "which@^1.3.1":
   "integrity" "sha512-HxJdYWq1MTIQbJ3nw0cqssHoTNU267KlrDuGZ1WYlxDStUtKUhOaJmh112/TZmHxxUfuJqPXSOm7tDyas0OSIQ=="
