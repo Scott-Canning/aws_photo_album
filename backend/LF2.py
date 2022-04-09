@@ -98,9 +98,3 @@ def lambda_handler(event, context):
     }
     
     return response
-    
-    #  {
-    #         'photoPaths': photo_paths,
-    #         'query': q,
-    #         'searchWords': labels,
-    #     }
