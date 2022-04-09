@@ -13,8 +13,8 @@ def get_labels(query):
     
     print("query: ", query)
     response = client.recognize_text(
-                                botId='ICY71BVTYZ',
-                                botAliasId='QDFWUFADKT',
+                                botId='TPS0E3ND7V',
+                                botAliasId='XDD1PNZYQX',
                                 localeId='en_US',
                                 sessionId='27',
                                 text=query
@@ -57,14 +57,17 @@ def get_photo_paths(labels):
     photo_paths = []
     for hit in responses:
         for id in hit:
-            photo_id = str(id['_id'])
-            photo_paths.append(photo_id)
+            bucket = str(id['_source']['bucket'])
+            photo = str(id['_source']['objectKey'])
+            photo_paths.append('https://' + bucket + '.s3.amazonaws.com/' + photo)
     return photo_paths
 
 
 # handler
 def lambda_handler(event, context):
     
+    logger.debug("event={}".format(event))
+
     q = event["queryStringParameters"]["q"]
     labels = get_labels(q)
 
@@ -73,21 +76,31 @@ def lambda_handler(event, context):
         
     if not photo_paths:
         return {
+            'isBase64Encoded': False,
+            "headers": {
+                "Access-Control-Allow-Headers" : "Content-Type",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                "Access-Control-Allow-Origin": "*"
+            },
             'statusCode': 200,
-            'body': json.dumps('Error')
+            'body': 'Error'
         }
     
-    return {
+    response = {
+        'isBase64Encoded': False,
         "statusCode": 200,
         "headers": {
             "Access-Control-Allow-Headers" : "Content-Type",
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
             "Access-Control-Allow-Origin": "*"
         },
-        "body": {
-            'photoPaths': photo_paths,
-            'query': q,
-            'searchWords': labels,
-        },
-        'isBase64Encoded': False
+        "body": json.dumps(photo_paths)
     }
+    
+    return response
+    
+    #  {
+    #         'photoPaths': photo_paths,
+    #         'query': q,
+    #         'searchWords': labels,
+    #     }

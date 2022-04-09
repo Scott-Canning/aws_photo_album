@@ -1,0 +1,2 @@
+MSTR_USER=''
+MSTR_PW=''

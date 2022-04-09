@@ -19,11 +19,12 @@ def get_key(event):
                                     Bucket=bucket_name,
                                     Key=object_key
                                     )
-    
-    # logger.debug('bucket_name={}'.format(bucket_name))
-    # logger.debug('object_key={}'.format(object_key))
-    # logger.debug('head_object={}'.format(head_object))
-    return bucket_name, object_key
+
+    logger.debug('head_object={}'.format(head_object))
+    x_amz_meta_customlabels = head_object['ResponseMetadata']['HTTPHeaders']['x-amz-meta-customlabels']
+    custom_labels = x_amz_meta_customlabels.split()
+    print(custom_labels)
+    return bucket_name, object_key, custom_labels
 
 
 # invoke rekognition
@@ -62,23 +63,19 @@ def index_photo(bucket, key, labels):
     }
     
     response = requests.post(url, auth=(MSTR_USER, MSTR_PW), headers=headers, data=json.dumps(index_object).encode("utf-8"))
-    
-    # logger.debug('url={}'.format(url))
-    # logger.debug('response={}'.format(response))
-    
     return response
     
 
 def lambda_handler(event, context):
-    bucket_name, object_key = get_key(event)
+    logger.debug('event={}'.format(event))
+    logger.debug('context={}'.format(context))
+    
+    bucket_name, object_key, custom_labels = get_key(event)
     labels = detect_labels(bucket_name, object_key)
+    labels.extend(custom_labels)
     response = index_photo(bucket_name, object_key, labels)
     
-    # logger.debug('event={}'.format(event))
-    # logger.debug('labels={}'.format(labels))
-    # logger.debug('response={}'.format(response))
-
     return {
         'statusCode': 200,
-        'body': json.dumps("")
+        'body': json.dumps(response)
     }
