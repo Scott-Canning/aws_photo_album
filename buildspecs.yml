@@ -11,8 +11,8 @@ phases:
     commands:
       - npm run build && aws s3 sync build/ s3://b1-front-end
 
-  artifacts:
-    files:
-      - "**/*"
-    discard-paths: no
-    base-directory: build
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: build
