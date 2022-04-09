@@ -3,16 +3,17 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - cd frontend
       - npm install
   build:
     commands:
       - npm run build
-  # post_build:
-  #   commands:
-  #     - npm run build && aws s3 sync build/ s3://b1-front-end
+  post_build:
+    commands:
+      - npm run build && aws s3 sync build/ s3://b1-front-end
 
 artifacts:
   files:
     - "**/*"
   discard-paths: no
-  base-directory: frontend
+  base-directory: build
