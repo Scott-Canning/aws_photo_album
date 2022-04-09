@@ -67,6 +67,15 @@
   background-color: rgb(255, 255, 255);
 }
 
+.search-wrapper{
+  float: center;
+  padding: 10px;
+  width: 500px;
+  margin: auto;
+  border-color: black;
+  font-size: 18px;
+  height: 30px;
+}
 
 .search {
   float: center;
@@ -84,11 +93,12 @@
   text-align: left;
   font-size: 18px;
   border-radius: 25px;
-  border-width: 1px;
+  border-width: 0px;
+  box-shadow: 0px 0px 5px rgb(173, 168, 168);
   padding-left: 14px;
   padding-right: 14px;
   height: 35px;
-  width: 80%;
+  width: 500px;
 }
 
 .search-button {
@@ -97,6 +107,79 @@
   width: 150px;
   height: 50px;
 }
+
+/* .search-ico {
+  position: absolute;
+  left: 10px;
+  top:8px;
+  cursor: pointer;
+}
+
+.microphone-ico {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  cursor: pointer;
+} */
+
+.upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 95%; 
+  border-color: black;
+  font-size: 18px;
+  height: 50px;
+}
+
+.upload input {
+  text-align: left;
+  font-size: 18px;
+  border-radius: 25px;
+  border-width: 0px;
+  box-shadow: 0px 0px 5px rgb(173, 168, 168);
+  padding-left: 14px;
+  padding-right: 14px;
+  height: 35px;
+  width: 425px;
+}
+
+.upload label {
+  color: black;
+  display: inline-block;
+  padding: 10px;
+  text-align: right;
+}
+
+.upload-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  width: 50%;
+  margin: auto;
+  border-color: black;
+  font-size: 18px;
+  height: 35px;
+}
+
+.select-button {
+  margin-left: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 150px;
+  height: 50px;
+}
+
+.upload-button{
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 150px;
+  height: 50px;
+}
+
 
 button {
   margin: auto;
@@ -115,6 +198,11 @@ button {
 button:hover{background-color:rgba(223, 223, 223, 0.904);}
 button:active{background-color:rgb(255, 255, 255);
               border-color: rgb(114, 219, 162)}
+
+
+button input {
+  color: rgb(54, 56, 54);
+}
 
 @keyframes App-logo-spin {
   from {
