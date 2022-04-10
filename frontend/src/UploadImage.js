@@ -6,8 +6,8 @@ const S3_BUCKET ='b2-photostore';
 const REGION ='us-east-1';
 
 AWS.config.update({
-    accessKeyId: AWS_ACCESS_KEY_ID, 
-    secretAccessKey: AWS_SECRET_ACCESS_KEY
+    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID, 
+    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY
 })
 
 const myBucket = new AWS.S3({
