@@ -2,14 +2,11 @@ import './App.css';
 import React , { useState } from 'react';
 import AWS from 'aws-sdk';
 
-const S3_BUCKET ='b2-photo-store';
+const S3_BUCKET ='b2-photostore';
 const REGION ='us-east-1';
 
-const AWS_ACCESS_KEY_ID = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
-const AWS_SECRET_ACCESS_KEY = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
-
 AWS.config.update({
-    accessKeyId: AWS_ACCESS_KEY_ID,
+    accessKeyId: AWS_ACCESS_KEY_ID, 
     secretAccessKey: AWS_SECRET_ACCESS_KEY
 })
 

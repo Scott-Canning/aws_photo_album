@@ -1,4 +1,3 @@
-from keys import MSTR_USER, MSTR_PW
 import requests
 import json
 import boto3
@@ -13,8 +12,8 @@ def get_labels(query):
     
     print("query: ", query)
     response = client.recognize_text(
-                                botId='TPS0E3ND7V',
-                                botAliasId='XDD1PNZYQX',
+                                botId='MLF3WQRWTY',
+                                botAliasId='XXEZZXJBLL',
                                 localeId='en_US',
                                 sessionId='27',
                                 text=query
@@ -36,7 +35,7 @@ def get_labels(query):
 # invoke opensearch
 def get_photo_paths(labels):
     # build search path
-    host = 'https://search-photos-yuim6a5bvmcdyjyaorzpwi5b44.us-east-1.es.amazonaws.com'
+    host = 'https://search-photo-indexer-uyc5xgne3swqhr3ssyttxrhywa.us-east-1.es.amazonaws.com'
     path = '/images/_doc/_search'
     url = host + path
     headers = { "Content-Type": "application/json" }
@@ -54,12 +53,16 @@ def get_photo_paths(labels):
         label_response = requests.get(url, auth=(MSTR_USER, MSTR_PW), headers=headers, data=json.dumps(query))
         responses.append(label_response.json()['hits']['hits'])
 
+    photos = []
     photo_paths = []
     for hit in responses:
         for id in hit:
             bucket = str(id['_source']['bucket'])
             photo = str(id['_source']['objectKey'])
-            photo_paths.append('https://' + bucket + '.s3.amazonaws.com/' + photo)
+            if photo not in photos:
+                photos.append(photo)
+                photo_paths.append('https://' + bucket + '.s3.amazonaws.com/' + photo)
+
     return photo_paths
 
 

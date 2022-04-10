@@ -1,4 +1,3 @@
-from keys import MSTR_USER, MSTR_PW
 import requests
 import json
 import logging
@@ -21,11 +20,16 @@ def get_key(event):
                                     )
 
     logger.debug('head_object={}'.format(head_object))
-    x_amz_meta_customlabels = head_object['ResponseMetadata']['HTTPHeaders']['x-amz-meta-customlabels']
-    custom_labels = x_amz_meta_customlabels.split()
-    print(custom_labels)
+    custom_labels = []
+    x_amz_meta_customlabels = ''
+    try:
+        x_amz_meta_customlabels = head_object['ResponseMetadata']['HTTPHeaders']['x-amz-meta-customlabels']
+        custom_labels = x_amz_meta_customlabels.split()
+        print(custom_labels)
+    except KeyError:
+        return bucket_name, object_key, custom_labels
+        
     return bucket_name, object_key, custom_labels
-
 
 # invoke rekognition
 def detect_labels(bucket, key):
@@ -49,7 +53,7 @@ def detect_labels(bucket, key):
 # index on OS
 def index_photo(bucket, key, labels):
     # build index path
-    host = 'https://search-photos-yuim6a5bvmcdyjyaorzpwi5b44.us-east-1.es.amazonaws.com' 
+    host = 'https://search-photo-indexer-uyc5xgne3swqhr3ssyttxrhywa.us-east-1.es.amazonaws.com'
     path = '/images/_doc'
     url = host + path
     headers = { "Content-Type": "application/json" }
@@ -75,7 +79,10 @@ def lambda_handler(event, context):
     labels.extend(custom_labels)
     response = index_photo(bucket_name, object_key, labels)
     
+    logger.debug('response={}'.format(response))
+    logger.debug('type(response)={}'.format(type(response)))
+    
     return {
         'statusCode': 200,
-        'body': json.dumps(response)
+        'body': json.dumps('Success')
     }

@@ -9,7 +9,7 @@ function App() {
   const [searchResponse, setSearchResponse] = React.useState([]);
 
   async function searchClicked() {
-    const base_url = 'https://3srvv5fsyi.execute-api.us-east-1.amazonaws.com/alpha/search?q=';
+    const base_url = 'https://p55ugn7fzj.execute-api.us-east-1.amazonaws.com/prod/search?q=';
     const params = search;
     const url = base_url + params;
     let response;
