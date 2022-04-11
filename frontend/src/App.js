@@ -16,7 +16,7 @@ function App() {
     try {
       response = await axios.get(url);
       setSearchResponse(response.data);
-    } catch(err){
+    } catch(err) {
       alert("No pictures matched your query.")
       setSearchResponse([]);
     }
