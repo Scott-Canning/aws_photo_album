@@ -11,5 +11,5 @@ phases:
 
 artifacts:
   files:
-    - "frontend/build/*"
+    - "frontend/build/**/*"
   discard-paths: no
