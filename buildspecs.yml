@@ -12,5 +12,4 @@ phases:
 artifacts:
   files:
     - "frontend/build/*"
-  base-directory: './'
   discard-paths: no
