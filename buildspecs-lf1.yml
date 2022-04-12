@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - cd backend
+  build:
+    commands:
+  post_build:
+    commands:
+      - aws lambda update-function-code \--function-name  LF1-index-photos \--s3-bucket lf1-code --s3-key lf1.zip
+
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
