@@ -3,9 +3,14 @@ import json
 import logging
 import boto3
 import time
+import os
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
+
+MSTR_USER = os.environ['MSTR_USER']
+MSTR_PW = os.environ['MSTR_PW']
+
 
 # get data from S3
 def get_key(event):

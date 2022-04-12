@@ -2,9 +2,13 @@ import requests
 import json
 import boto3
 import logging
+import os
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
+
+MSTR_USER = os.environ['MSTR_USER']
+MSTR_PW = os.environ['MSTR_PW']
 
 # invoke lex
 def get_labels(query):
