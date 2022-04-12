@@ -1,0 +1,236 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: SmartPhotoAlbum
+
+Resources:
+    FrontEnd:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: bucket1-front-end
+        AccessControl: PublicRead
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: index.html
+      DependsOn: 
+      - RestAPI
+
+    PhotoStore:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: bucket2-photo-store
+        AccessControl: PublicRead
+        CorsConfiguration:
+          CorsRules:
+            AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - HEAD
+              - GET
+              - PUT
+              - POST
+              - DELETE
+            AllowedOrigins:
+              - "*"
+            ExposeHeaders:
+              - ETag
+        NotificationConfiguration:
+          LambdaConfigurations:
+              Event: Put
+              Filter: NotificationFilter
+              Function: arn:aws:lambda:us-east-1:472171587515:function:LF1-index-photos
+
+    LF1Code:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: lf1-code-bucket
+        AccessControl: PublicRead
+
+    LF2Code:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: lf2-code-bucket
+        AccessControl: PublicRead
+
+    PhotoIndexer:
+      Type: AWS::OpenSearchService::Domain
+      Properties:
+        DomainName: photos
+        AccessPolicy: {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "*"
+              },
+              "Action": "es:*",
+              "Resource": "arn:aws:es:us-east-1:472171587515:domain/photos/*"
+            }
+          ]
+        }
+
+    LambdaOne:
+      Type: AWS::Lambda::Function
+      Properties:
+        FunctionName: LF1-index-photos
+        Runtime: python3.9
+        Code:
+          S3Bucket: lf1-code
+          S3Key: build.zip
+        Handler: LF1-index-photos/lambda_function.lambda_handler
+        Layers:
+          - arn:aws:lambda:us-east-1:770693421928:layer:Klayers-p39-requests:2
+      DependsOn: 
+        - LF1Code
+        - PhotoStore
+        - PhotoIndexer
+        - LabelRecognition
+
+    LambdaTwo:
+      Type: AWS::Lambda::Function
+      Properties:
+        FunctionName: LF2-search-photos
+        Runtime: python3.9
+        Code:
+          S3Bucket: lf2-code
+          S3Key: build.zip
+        Handler: LF2-search-photos/lambda_function.lambda_handler
+        Layers:
+          - arn:aws:lambda:us-east-1:770693421928:layer:Klayers-p39-requests:2
+      DependsOn: 
+        - LF2Code
+        - PhotoIndexer
+        - SearchBot
+
+    SearchBot:
+      Type: AWS::Lex::Bot
+      Properties:
+        IdleSessionTTLInSeconds: 300
+        Name: lexSearchBot
+        RoleArn: AWSServiceRoleForLexV2Bots_H90CVEW230C
+
+    LabelRecognition:
+      Type: AWS::Rekognition::Project
+        Properties:
+          ProjectName: photo-labeler
+
+    RestAPI:
+      Type: AWS::ApiGateway::RestApi
+      Properties:
+          Body:
+            swagger: 2.0
+            info:
+              version: 2022-04-04T21:47:20Z
+              title: photo-handler
+            host: p55ugn7fzj.execute-api.us-east-1.amazonaws.com
+            basePath: /prod
+            schemes:
+            - https
+            paths:
+              /search:
+                get:
+                  produces:
+                  - application/json
+                  parameters:
+                  - name: Access-Control-Allow-Origin
+                    in: header
+                    required: false
+                    type: string
+                  - name: Access-Control-Allow-Headers
+                    in: header
+                    required: false
+                    type: string
+                  - name: Access-Control-Allow-Methods
+                    in: header
+                    required: false
+                    type: string
+                  responses:
+                    "200":
+                      description: 200 response
+                      schema:
+                        $ref: "#/definitions/Empty"
+                      headers:
+                        Access-Control-Allow-Origin:
+                          type: string
+                        Access-Control-Allow-Methods:
+                          type: string
+                        Access-Control-Allow-Headers:
+                          type: string
+                options:
+                  consumes:
+                  - application/json
+                  produces:
+                  - application/json
+                  responses:
+                    "200":
+                      description: 200 response
+                      schema:
+                        $ref: "#/definitions/Empty"
+                      headers:
+                        Access-Control-Allow-Origin:
+                          type: string
+                        Access-Control-Allow-Methods:
+                          type: string
+                        Access-Control-Allow-Headers:
+                          type: string
+              /{folder}/{object}:
+                put:
+                  produces:
+                  - application/json
+                  parameters:
+                  - name: object
+                    in: path
+                    required: true
+                    type: string
+                  - name: folder
+                    in: path
+                    required: true
+                    type: string
+                  responses:
+                    "200":
+                      description: 200 response
+                      schema:
+                        $ref: "#/definitions/Empty"
+                      headers:
+                        Access-Control-Allow-Origin:
+                          type: string
+                        Access-Control-Allow-Methods:
+                          type: string
+                        Access-Control-Allow-Headers:
+                          type: string
+                options:
+                  consumes:
+                  - application/json
+                  produces:
+                  - application/json
+                  parameters:
+                  - name: object
+                    in: path
+                    required: true
+                    type: string
+                  - name: folder
+                    in: path
+                    required: true
+                    type: string
+                  responses:
+                    "200":
+                      description: 200 response
+                      schema:
+                        $ref: "#/definitions/Empty"
+                      headers:
+                        Access-Control-Allow-Origin:
+                          type: string
+                        Access-Control-Allow-Methods:
+                          type: string
+                        Access-Control-Allow-Headers:
+                          type: string
+            definitions:
+              Empty:
+                type: object
+                title: Empty Schema
+          RestApiId: p55ugn7fzj
+          StageName: prod
+          Parameters:
+            endpointConfigurationTypes: REGIONAL
+      DependsOn:
+        - LambdaTwo
+        - PhotoStore
