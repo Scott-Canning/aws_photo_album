@@ -16,8 +16,8 @@ def get_labels(query):
     
     print("query: ", query)
     response = client.recognize_text(
-                                botId='MLF3WQRWTY',
-                                botAliasId='XXEZZXJBLL',
+                                botId='<bot-ID>',
+                                botAliasId='<bot-alias-ID>',
                                 localeId='en_US',
                                 sessionId='27',
                                 text=query
@@ -39,7 +39,7 @@ def get_labels(query):
 # invoke opensearch
 def get_photo_paths(labels):
     # build search path
-    host = 'https://search-photo-indexer-uyc5xgne3swqhr3ssyttxrhywa.us-east-1.es.amazonaws.com'
+    host = '<OpenSearch-host-url>'
     path = '/images/_doc/_search'
     url = host + path
     headers = { "Content-Type": "application/json" }
