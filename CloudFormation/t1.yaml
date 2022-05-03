@@ -36,7 +36,7 @@ Resources:
           LambdaConfigurations:
               Event: Put
               Filter: NotificationFilter
-              Function: arn:aws:lambda:us-east-1:472171587515:function:LF1-index-photos
+              Function: arn:aws:lambda:us-east-1:<Account-ID>:function:LF1-index-photos
 
     LF1Code:
       Type: AWS::S3::Bucket
@@ -63,7 +63,7 @@ Resources:
                 "AWS": "*"
               },
               "Action": "es:*",
-              "Resource": "arn:aws:es:us-east-1:472171587515:domain/photos/*"
+              "Resource": "arn:aws:es:us-east-1:<Account-ID>:domain/photos/*"
             }
           ]
         }
@@ -121,7 +121,7 @@ Resources:
             info:
               version: 2022-04-04T21:47:20Z
               title: photo-handler
-            host: p55ugn7fzj.execute-api.us-east-1.amazonaws.com
+            host: <Rest-API-ID>.execute-api.us-east-1.amazonaws.com
             basePath: /prod
             schemes:
             - https
@@ -227,7 +227,7 @@ Resources:
               Empty:
                 type: object
                 title: Empty Schema
-          RestApiId: p55ugn7fzj
+          RestApiId: <Rest-API-ID>
           StageName: prod
           Parameters:
             endpointConfigurationTypes: REGIONAL
