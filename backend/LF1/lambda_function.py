@@ -58,7 +58,7 @@ def detect_labels(bucket, key):
 # index on OS
 def index_photo(bucket, key, labels):
     # build index path
-    host = 'https://search-photo-indexer-uyc5xgne3swqhr3ssyttxrhywa.us-east-1.es.amazonaws.com'
+    host = '<OpenSearch-host-url>'
     path = '/images/_doc'
     url = host + path
     headers = { "Content-Type": "application/json" }
